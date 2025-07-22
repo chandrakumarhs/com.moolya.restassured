@@ -15,12 +15,13 @@ import com.moolya.api.utils.PlayloadUtils;
 import com.moolya.api.utils.PropertyOperations;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 
 public class ApiAutomation {
 	//invocationCount tags
 	
-	@Test(description = "This method executes the get API and getting the base uri and endpoint are harcoded", groups = {"smoke"})
+	@Test(description = "TC01_This method executes the get API and getting the base uri and endpoint are harcoded", groups = {"TC01", "smoke"})
 	public void getListOfUsersHardCoded() {
 		given().baseUri("https://reqres.in").
 		when().get("/api/users?page=2").
@@ -28,7 +29,7 @@ public class ApiAutomation {
 		assertThat().statusCode(200);	
 	}
 	
-	@Test(description = "This method executes the get API and validating the response body")
+	@Test(description = "TC02_This method executes the get API and validating the response body", groups = {"TC02", "smoke", "Regression"})
 	public void getListOfUSers_body_validation() {
 		given().baseUri("https://reqres.in").
 		when().get("/api/users?page=2").
@@ -40,7 +41,7 @@ public class ApiAutomation {
 		body("data.first_name", hasItem("Byron"));
 	}
 	
-	@Test(description = "This method executes the get API and getting the base uri and endpoint from property fie")
+	@Test(description = "TC03_This method executes the get API and getting the base uri and endpoint from property fie", groups = {"TC03", "Regression"})
 	public void getListOfUsers() {
 		RestAssured.baseURI = PropertyOperations.getPropertyValueByKey("baseUrl");
 		given().
@@ -48,7 +49,7 @@ public class ApiAutomation {
 		then().log().all().assertThat().statusCode(200);		
 	}
 	
-	@Test(description = "this method is used to create a record and using pojo class")
+	@Test(description = "TC04_this method is used to create a record and using pojo class")
 	public void createUser() throws Exception {
 		RestAssured.baseURI = PropertyOperations.getPropertyValueByKey("dummyApiBaseUrl");
 		
@@ -78,7 +79,7 @@ public class ApiAutomation {
 	
 	
 	
-	@Test(description = "This method used to update the user salary and age details", groups = {"smoke"})
+	@Test(description = "TC05_This method used to update the user salary and age details", groups = {"TC05", "smoke"})
 	public void updateUserDetails() {
 		RestAssured.baseURI = PropertyOperations.getPropertyValueByKey("dummyApiBaseUrl");
 		
@@ -103,22 +104,56 @@ public class ApiAutomation {
 			.body("data.name", is(equalTo(name)))
 			.body("data.salary", is(equalTo(salary)))
 			.body("data.age", is(equalTo(age)));
-			getTheDetailsOfUseAfterUpdater(salary,age);
+			//getTheDetailsOfUseAfterUpdater(salary,age);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	@Test(description = "Get the details of the single user based on the id", dependsOnMethods = {"updateUserDetails"}, groups = {"smoke", "Regression"})
+	@Test(description = "TC05A_This method used to update the user salary and age details", groups = {"TC05", "smoke"})
+	public void updateUserDetailsWithDisplay() {
+		RestAssured.baseURI = PropertyOperations.getPropertyValueByKey("dummyApiBaseUrl");
+		
+		//Generate test data
+		String name = CommonFunctions.generateRandomNames();
+		String salary = CommonFunctions.generateRandomSalary();
+		String age = CommonFunctions.generateRandomNumber();
+		
+		User user = new User(name, salary, age);
+		
+		//Read and prepare request payload
+		try {
+			String payload = PlayloadUtils.readJsonAndReplace("src/test/resources/requestPayload/createUser.json", user);
+			Response response = RestAssured.given()
+			.contentType("application/json")
+			.body(payload).
+		when()
+			.put(PropertyOperations.getPropertyValueByKey("dummyApiUpdateEndpoint")).
+		then()
+			.log().all()
+			.assertThat().statusCode(200)
+			.body("data.name", is(equalTo(name)))
+			.body("data.salary", is(equalTo(salary)))
+			.body("data.age", is(equalTo(age))).extract().response();
+			
+			String responseBody = response.getBody().toString();
+			System.out.println("the update response: " + responseBody);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(description = "TC06_Get the details of the single user based on the id", dependsOnMethods = {"updateUserDetails"}, groups = {"TC06", "smoke", "Regression"})
 	public void getTheDetailsOfUseAfterUpdater(String salary, String age) {
 		RestAssured.baseURI = PropertyOperations.getPropertyValueByKey("dummyApiBaseUrl");
 		given()
 		.when().get(PropertyOperations.getPropertyValueByKey("dummyApiGetEndpoint"))
 		.then()
 		.log().all()
-		.body("data.salary", is(equalTo(salary)))
-		.body("data.age", is(equalTo(age)));
+		.body("data.employee_salary", is(equalTo(salary)))
+		.body("data.employee_age", is(equalTo(age)));
 	}
 	
 	@Test(description = "this method is used to create a record")

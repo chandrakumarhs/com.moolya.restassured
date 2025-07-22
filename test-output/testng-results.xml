@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="5" total="7" passed="1" failed="1" skipped="0">
+<testng-results ignored="6" total="8" passed="1" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-16T13:02:06 IST" name="Default suite" finished-at="2025-07-16T13:02:08 IST" duration-ms="1379">
+  <suite started-at="2025-07-22T12:18:07 IST" name="Default suite" finished-at="2025-07-22T12:18:08 IST" duration-ms="1376">
     <groups>
+      <group name="TC06">
+        <method signature="ApiAutomation.getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" name="getTheDetailsOfUseAfterUpdater" class="com.moolya.api.tests.ApiAutomation"/>
+      </group> <!-- TC06 -->
+      <group name="TC05">
+        <method signature="ApiAutomation.updateUserDetails()[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" name="updateUserDetails" class="com.moolya.api.tests.ApiAutomation"/>
+      </group> <!-- TC05 -->
       <group name="Regression">
-        <method signature="ApiAutomation.getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@73cd37c0]" name="getTheDetailsOfUseAfterUpdater" class="com.moolya.api.tests.ApiAutomation"/>
+        <method signature="ApiAutomation.getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" name="getTheDetailsOfUseAfterUpdater" class="com.moolya.api.tests.ApiAutomation"/>
       </group> <!-- Regression -->
       <group name="smoke">
-        <method signature="ApiAutomation.updateUserDetails()[pri:0, instance:com.moolya.api.tests.ApiAutomation@73cd37c0]" name="updateUserDetails" class="com.moolya.api.tests.ApiAutomation"/>
-        <method signature="ApiAutomation.getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@73cd37c0]" name="getTheDetailsOfUseAfterUpdater" class="com.moolya.api.tests.ApiAutomation"/>
+        <method signature="ApiAutomation.updateUserDetails()[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" name="updateUserDetails" class="com.moolya.api.tests.ApiAutomation"/>
+        <method signature="ApiAutomation.getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" name="getTheDetailsOfUseAfterUpdater" class="com.moolya.api.tests.ApiAutomation"/>
       </group> <!-- smoke -->
     </groups>
-    <test started-at="2025-07-16T13:02:06 IST" name="Default test" finished-at="2025-07-16T13:02:08 IST" duration-ms="1379">
+    <test started-at="2025-07-22T12:18:07 IST" name="Default test" finished-at="2025-07-22T12:18:08 IST" duration-ms="1376">
       <class name="com.moolya.api.tests.ApiAutomation">
-        <test-method signature="updateUserDetails()[pri:0, instance:com.moolya.api.tests.ApiAutomation@73cd37c0]" started-at="2025-07-16T13:02:06 IST" name="updateUserDetails" description="This method used to update the user salary and age details" finished-at="2025-07-16T13:02:07 IST" duration-ms="1195" status="PASS">
+        <test-method signature="updateUserDetails()[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" started-at="2025-07-22T12:18:07 IST" name="updateUserDetails" description="TC05_This method used to update the user salary and age details" finished-at="2025-07-22T12:18:08 IST" duration-ms="1225" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- updateUserDetails -->
-        <test-method signature="getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@73cd37c0]" started-at="2025-07-16T13:02:08 IST" name="getTheDetailsOfUseAfterUpdater" description="Get the details of the single user based on the id" finished-at="2025-07-16T13:02:08 IST" depends-on-methods="com.moolya.api.tests.ApiAutomation.updateUserDetails" duration-ms="0" status="FAIL">
+        <test-method signature="getTheDetailsOfUseAfterUpdater(java.lang.String,java.lang.String)[pri:0, instance:com.moolya.api.tests.ApiAutomation@1ed4ae0f]" started-at="2025-07-22T12:18:08 IST" name="getTheDetailsOfUseAfterUpdater" description="TC06_Get the details of the single user based on the id" finished-at="2025-07-22T12:18:08 IST" depends-on-methods="com.moolya.api.tests.ApiAutomation.updateUserDetails" duration-ms="0" status="FAIL">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
